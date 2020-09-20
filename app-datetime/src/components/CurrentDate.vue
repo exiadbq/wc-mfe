@@ -1,34 +1,44 @@
 <template>
     <section>
         <h1>{{ msg }}</h1>
-        <div>
-{{displayDate}}
+        <div v-if="tz">
+        {{displayDate}}
         </div>
     </section>
 </template>
 
 <script>
+    import eventBus from "../eventBus";
+    import {DateTime} from 'luxon';
     export default {
         name: "CurrentDate",
         props: {
             msg: String
         },
         beforeDestroy () {
-            clearInterval(this.polling)
+            clearInterval(this.polling);
+            eventBus.remove("tzApply");
         },
         created () {
-            this.pollData()
+            this.pollData();
+            eventBus.on("tzApply", (data) => {
+                console.log('received', data);
+                this.tz = data.message
+                }
+            )
         },
         data(){
             return {
-                displayDate: new Date(),
-                polling: null
+                displayDate: null,
+                polling: null,
+                tz: null
             }
         },
         methods: {
             pollData () {
                 this.polling = setInterval(() => {
-                    this.displayDate = new Date()
+                    if (this.tz)
+                    {this.displayDate = DateTime.local().setZone(this.tz.zoneName)}
                 }, 1000)
             }
         },

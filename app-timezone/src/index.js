@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactWebComponent from 'react-web-component';
 
-import { TimezoneList } from './TimezoneList.js';
+import App from './App.js';
 
 
-ReactWebComponent.create(<TimezoneList />, 'app-timezone');
+ReactWebComponent.create(<App />, 'app-timezone', true);

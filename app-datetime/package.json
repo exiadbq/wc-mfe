@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@vue/web-component-wrapper": "^1.2.0",
+    "luxon": "^1.25.0",
     "vue": "^2.6.12"
   },
   "scripts": {
