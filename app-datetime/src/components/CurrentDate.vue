@@ -1,15 +1,37 @@
 <template>
-    <div class="hello">
+    <section>
         <h1>{{ msg }}</h1>
-    </div>
+        <div>
+{{displayDate}}
+        </div>
+    </section>
 </template>
 
 <script>
     export default {
-        name: "HelloWorld",
+        name: "CurrentDate",
         props: {
             msg: String
-        }
+        },
+        beforeDestroy () {
+            clearInterval(this.polling)
+        },
+        created () {
+            this.pollData()
+        },
+        data(){
+            return {
+                displayDate: new Date(),
+                polling: null
+            }
+        },
+        methods: {
+            pollData () {
+                this.polling = setInterval(() => {
+                    this.displayDate = new Date()
+                }, 1000)
+            }
+        },
     };
 </script>
 
@@ -17,16 +39,5 @@
 <style scoped>
     h3 {
         margin: 40px 0 0;
-    }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-    a {
-        color: #42b983;
     }
 </style>

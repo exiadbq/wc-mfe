@@ -1,17 +1,17 @@
 <template>
     <div id="app">
-        <HelloWorld msg="Welcome to Your Vue.js App" />
+        <current-date msg="Current date time" />
     </div>
 </template>
 
 <script>
-    import HelloWorld from "./components/CurrentDate.vue";
+    import CurrentDate from "./components/CurrentDate.vue";
 
     export default {
     name: "App",
     components: {
-    HelloWorld
-}
+        CurrentDate
+    }
 };
 </script>
 
