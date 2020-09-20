@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Micro frontend using Web Components</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+
+<body onload="onload()">
+<!-- @todo dynamically insert or programmly define in DOM-->
+<div id="app-timezone-container" class="w-full h-64"></div>
+<div id="app-datetime-container"></div>
+
+<script>
+    function onload() {
+        // demo purpose: resolve a static list
+        const apps = [
+            {name:'app-timezone', port: 6002, version:'0.1.0'},
+            { name:"app-datetime",port: 6001, version:'0.1.0'}
+            ];
+        apps.forEach(app => {
+            const scriptEl = document.createElement('script');
+            scriptEl.setAttribute('src',`http://localhost:${app.port}/${app.name}/${app.version}/${app.name}.js`);
+            document.head.appendChild(scriptEl);
+        })
+        // @todo load apps from API config
+        Promise.resolve(apps).then((apps) => apps.forEach((app) => {
+                const appEl = document.createElement(app.name);
+                const container = document.getElementById(`${app.name}-container`)
+                if (container.children.length > 0) {
+                    container.removeChild(container.children[0]);
+                }
+                container.appendChild(appEl);
+            }
+        ))
+    }
+</script>
+</body>
+</html>
