@@ -2,7 +2,18 @@
   <section>
     <h1>{{ msg }}</h1>
     <div v-if="tz">
-      {{ displayDate }}
+      <strong>{{ tz.zoneName }} time now</strong>
+      <div>
+        <strong :style="{ fontSize: 'xxx-large' }">
+          {{ displayDate.time }}
+        </strong>
+        <sub :style="{ color: 'grey' }">
+          {{ displayDate.meridiem }}
+        </sub>
+      </div>
+      <div :style="{ color: 'slategrey' }">
+        {{ displayDate.weekday }}
+      </div>
     </div>
   </section>
 </template>
@@ -27,7 +38,7 @@ export default {
   },
   data() {
     return {
-      displayDate: null,
+      displayDate: {},
       polling: null,
       tz: null
     };
@@ -36,8 +47,12 @@ export default {
     pollData() {
       this.polling = setInterval(() => {
         if (this.tz) {
-          this.displayDate =
-              DateTime.local().setZone(this.tz.zoneName).toFormat('hh:mm:S');
+          const dt = DateTime.local().setZone(this.tz.zoneName);
+          this.displayDate = {
+            time: dt.toFormat("TT"),
+            meridiem: dt.toFormat("a"),
+            weekday: dt.toFormat("DDDD")
+          };
         }
       }, 1000);
     }
@@ -46,8 +61,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-</style>
+<style scoped></style>

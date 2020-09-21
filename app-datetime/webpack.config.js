@@ -13,7 +13,10 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: "vue-loader"
+        loader: "vue-loader",
+        options: {
+          shadowMode: true
+        }
       },
       {
         test: /\.js$/,
@@ -26,7 +29,20 @@ module.exports = {
       // AND `<style>` blocks in `.vue` files
       {
         test: /\.css$/,
-        use: ["vue-style-loader", "css-loader"]
+        use: [
+          {
+            loader: "vue-style-loader",
+            options: {
+              shadowMode: true
+            }
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true
+            }
+          }
+        ]
       }
     ]
   },

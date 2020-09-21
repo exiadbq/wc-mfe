@@ -35,10 +35,10 @@ const TimezoneList = () => {
 
 },[])
 
-      return (zones.length > 0 ?<table className="h-64">
+      return (zones.length > 0 ?<table>
         <thead>
         <tr>
-        {['Offset','Timezone Abbr & Name'].map(th => <th key={th}>{th}</th>)}
+        {['Offset','Timezone Abbr & Name'].map(th => <th key={th} style={{textAlign:'left'}}>{th}</th>)}
         </tr>
         </thead>
         <tbody>
@@ -50,7 +50,8 @@ const TimezoneList = () => {
                   <td>UTC {tz.toFormat('ZZ')}</td>
                   <td style={{'display':'flex'}}>
                     <span style={{'width': '100px'}}>
-                      <a href="#" onClick={() => {
+                      <a href={'#'+z.zoneName}
+                       onClick={() => {
                             eventBus.dispatch("tzApply", { message: z });
                         }}>{tz.toFormat('ZZZZ')}
                       </a>
