@@ -3,8 +3,9 @@
     <h1>{{ msg }}</h1>
     <div v-if="tz">
       <strong>{{ tz.zoneName }} time now</strong>
-      <div>
-        <strong :style="{ fontSize: 'xxx-large' }">
+      <div :style="{display:'flex', alignItems:'baseline'}">
+        <strong :style="{
+          fontSize: 'xxx-large',width:'215px' }">
           {{ displayDate.time }}
         </strong>
         <sub :style="{ color: 'grey' }">
