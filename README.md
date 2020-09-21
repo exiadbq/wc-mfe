@@ -1,6 +1,13 @@
 # Timezone and current date
+## Get started
+- install
+```
+$ npm i && npm start
+```
 
-## thinking process
+- open your browser in [localhost:4000](http://localhost:4000)
+
+## Thinking process
 1. started as MFE test with Web Components
 2. may need to pass to apps data, props etc, but real world app consideration, no routing needed
 3. given time limit, to create bare minimum to demo

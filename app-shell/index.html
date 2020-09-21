@@ -7,9 +7,15 @@
 </head>
 
 <body onload="onload()">
-<!-- @todo dynamically insert or programmly define in DOM-->
-<div id="app-timezone-container" class="w-full h-64"></div>
-<div id="app-datetime-container"></div>
+<main class="flex bg-gray-200">
+    <!-- @todo dynamically insert or programmly define in DOM-->
+    <div id="app-datetime-container"
+         class="flex-auto px-4 py-2 m-2 bg-gray-400"></div>
+    <div id="app-timezone-container"
+         class="flex-auto px-4 py-2 m-2 bg-gray-400"></div>
+
+</main>
+
 
 <script>
     function onload() {
