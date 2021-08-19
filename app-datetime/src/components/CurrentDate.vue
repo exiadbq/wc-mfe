@@ -33,6 +33,10 @@ export default {
   },
   created() {
     this.pollData();
+    const [,tz] = window.location.href.split('#');
+    if (tz) {
+      this.tz = {zoneName: tz};
+    }
     eventBus.on("tzApply", data => {
       this.tz = data.message;
     });
